@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  mysql-replica:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_REPLICA_USER: replicauser
+      MYSQL_REPLICA_PASSWORD: replicapassword
+      MYSQL_MASTER_HOST: masterhost
+      MYSQL_DATABASE: mydatabase
+    volumes:
+      - mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+volumes:
+  mysql-data:
